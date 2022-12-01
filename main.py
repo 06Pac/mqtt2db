@@ -3,8 +3,6 @@ import json
 from SensorData import SensorData
 import mysql.connector as mysql
 
-## mqtt psw: NNSXS.DTT4HTNBXEQDZ4QYU6SG73Q2OXCERCZ6574RVXI.CQE6IG6FYNJOO2MOFMXZVWZE4GXTCC2YXNQNFDLQL4APZMWU6ZGA
-## mqtt username: project-software-engineering@ttn
 
 
 ## DB query template
@@ -13,8 +11,8 @@ mySql_insert_query = """INSERT INTO transaction (city,date,temperature,light,pre
                            (%s,%s,%s,%s,%s,%s)"""
 
 
-connection = mysql.connect(host="localhost",
-                           database="weather-db",
+connection = mysql.connect(host="34.90.20.160",
+                           database="project",
                            user="root",
                            password="Lololo123")
 
