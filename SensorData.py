@@ -1,3 +1,4 @@
+import json
 class SensorData:
     """
         Documentation for a SensorData class.
@@ -18,8 +19,14 @@ class SensorData:
         self.pressure = None
         self.humidity = None
         self.datetime = None
+        self.battery_voltage = None
+        self.batteey_status = None
+        self.latitude = None
+        self.longitude = None
+        self.rssi = None
+        self.consumed_airtime = None
 
-    def parse(self, msg_string):
+    def weather_data_parse(self, msg_string):
         """
             @brief Function for parsing data and assigning class variables.
             @param msg_string: takes string of data in json format.
@@ -43,3 +50,5 @@ class SensorData:
             self.light = None
             self.pressure = None
             self.datetime = msg_string['uplink_message']['rx_metadata'][0]['time']
+
+

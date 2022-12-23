@@ -6,15 +6,25 @@ import mysql.connector as mysql
 
 
 ## DB query template
-mySql_insert_query = """INSERT INTO transaction (city,date,temperature,light,pressure,humidity) 
+mySql_insert_query = """INSERT INTO weather_data (temperature,light,pressure,humidity) 
                            VALUES 
-                           (%s,%s,%s,%s,%s,%s)"""
+                           (%s,%s,%s,%s)
+                           """
+mySql_insert_query = """INSERT INTO transaction (device_id, timestamp) 
+                           VALUES 
+                           (%s,%s)
+                           """
+mySql_insert_query = """INSERT INTO device_data (altitude,longitude,battery_voltage, battery_status,consumed_airtime) 
+                           VALUES 
+                           (%s,%s,%s,%s)
+                           """
 
 
-connection = mysql.connect(host="34.90.20.160",
-                           database="project",
-                           user="root",
-                           password="Lololo123")
+
+connection = mysql.connect(host=PORT,
+                           database=DATABASE,
+                           user=USER,
+                           password=PASSWORD)
 
 
 def mqtt_aunth():
@@ -54,7 +64,7 @@ def on_message(client, userdata, msg):
     to_string = json.loads(msg.payload)
     print(to_string)
     ## calling SensorData member function for parsing data and assigning class variables
-    data.parse(to_string)
+    data.weather_data_parse(to_string)
     ##  array with SensorData variables, previusly assigned dy parse() function.
     db_values = (data.device_id, data.datetime, data.temperature, data.light, data.pressure, data.humidity)
     ## cursor is Mysql object to manipulate with DB
