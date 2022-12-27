@@ -23,7 +23,7 @@ class SensorData:
         self.humidity = None
         self.datetime = None
         self.battery_voltage = None
-        self.batteey_status = None
+        self.battery_status = None
         self.latitude = None
         self.longitude = None
 
@@ -39,7 +39,7 @@ class SensorData:
             self.pressure = msg_string['uplink_message']['decoded_payload']['pressure']
             self.humidity = None
             self.datetime = msg_string['uplink_message']['rx_metadata'][0]['time']
-            self.batteey_status = None
+            self.battery_status = None
             self.battery_voltage = None
             self.latitude = msg_string['uplink_message']['rx_metadata'][0]['location']['latitude']
             self.longitude = msg_string['uplink_message']['rx_metadata'][0]['location']['longitude']
@@ -49,7 +49,7 @@ class SensorData:
             self.light = None
             self.pressure = None
             self.datetime = msg_string['uplink_message']['rx_metadata'][0]['time']
-            self.batteey_status = msg_string['uplink_message']['decoded_payload']['Bat_status']
+            self.battery_status = msg_string['uplink_message']['decoded_payload']['Bat_status']
             self.battery_voltage = msg_string['uplink_message']['decoded_payload']['BatV']
             self.latitude = msg_string['uplink_message']['rx_metadata'][0]['location']['latitude']
             self.longitude = msg_string['uplink_message']['rx_metadata'][0]['location']['longitude']
@@ -59,7 +59,7 @@ class SensorData:
             self.light = None
             self.pressure = None
             self.datetime = msg_string['uplink_message']['rx_metadata'][0]['time']
-            self.batteey_status = msg_string['uplink_message']['decoded_payload']['Bat_status']
+            self.battery_status = msg_string['uplink_message']['decoded_payload']['Bat_status']
             self.battery_voltage = msg_string['uplink_message']['decoded_payload']['BatV']
             self.latitude = msg_string['uplink_message']['rx_metadata'][0]['location']['latitude']
             self.longitude = msg_string['uplink_message']['rx_metadata'][0]['location']['longitude']
@@ -69,7 +69,7 @@ class SensorData:
             self.pressure = msg_string['uplink_message']['decoded_payload']['pressure']
             self.humidity = None
             self.datetime = msg_string['uplink_message']['rx_metadata'][0]['time']
-            self.batteey_status = msg_string['uplink_message']['decoded_payload']['Bat_status']
+            self.battery_status = msg_string['uplink_message']['decoded_payload']['Bat_status']
             self.battery_voltage = msg_string['uplink_message']['decoded_payload']['BatV']
             self.latitude = msg_string['uplink_message']['rx_metadata'][0]['location']['latitude']
             self.longitude = msg_string['uplink_message']['rx_metadata'][0]['location']['longitude']
