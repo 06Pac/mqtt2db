@@ -6,25 +6,26 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()
-PORT = os.getenv('PORT')
+DB_HOST = os.getenv('HOST')
 DATABASE = os.getenv('DATABASE')
-PASSWORD = os.getenv('PASSWORD')
-USER = os.getenv('USER')
+DB_PASSWORD = os.getenv('PASSWORD')
+DB_USER = os.getenv('USER')
 USERNAME = os.getenv('USERNAME')
 PASSWD = os.getenv('PASSWD')
 OWN_USERNAME = os.getenv('OWN_USERNAME')
 OWN_PASSWD = os.getenv('OWN_PASSWD')
-## DB query template
+
+# DB query template
 mySql_insert_query = (
     'INSERT INTO transaction (temperature,light,pressure,humidity,timestamp,device_id,latitude,longitude,battery_status,battery_voltage) \n'
     '                           VALUES \n'
     '                           (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)\n'
     '                           ')
 
-connection = mysql.connect(host=PORT,
+connection = mysql.connect(host=DB_HOST,
                            database=DATABASE,
-                           user=USER,
-                           password=PASSWORD)
+                           user=DB_USER,
+                           password=DB_PASSWORD)
 
 
 def mqtt_aunth():
@@ -35,7 +36,7 @@ def mqtt_aunth():
     # username = input()
     # print('Enter MQTT psw:')
     # password = input()
-    client.username_pw_set(username=USERNAME, password=PASSWD)
+    client.username_pw_set('project-software-engineering@ttn','NNSXS.DTT4HTNBXEQDZ4QYU6SG73Q2OXCERCZ6574RVXI.CQE6IG6FYNJOO2MOFMXZVWZE4GXTCC2YXNQNFDLQL4APZMWU6ZGA')
     own_sensor.username_pw_set(username=OWN_USERNAME, password=OWN_PASSWD)
 
 
@@ -105,20 +106,20 @@ def on_message_own(client, userdata, msg):
     ## converting to json format
     to_string = json.loads(msg.payload)
     print(to_string)
-    ## calling SensorData member function for parsing data and assigning class variables
-    data.weather_data_parse(to_string)
-    ##  array with SensorData variables, previusly assigned dy parse() function.
-    db_values = (data.device_id, data.datetime, data.temperature, data.light, data.pressure, data.humidity)
-    ## cursor is Mysql object to manipulate with DB
-    cursor = connection.cursor()
-    ## pushing to db
-    cursor.execute(mySql_insert_query, db_values)
-    ## destroying SensorClass object
-    del data
-    ## sends a commit statement to the MySQL server, committing the current transaction.
-    connection.commit()
-    ## Closing cursor.
-    cursor.close()
+    # ## calling SensorData member function for parsing data and assigning class variables
+    # data.weather_data_parse(to_string)
+    # ##  array with SensorData variables, previusly assigned dy parse() function.
+    # db_values = (data.device_id, data.datetime, data.temperature, data.light, data.pressure, data.humidity)
+    # ## cursor is Mysql object to manipulate with DB
+    # cursor = connection.cursor()
+    # ## pushing to db
+    # cursor.execute(mySql_insert_query, db_values)
+    # ## destroying SensorClass object
+    # del data
+    # # sends a commit statement to the MySQL server, committing the current transaction.
+    # connection.commit()
+    # # Closing cursor.
+    # cursor.close()
 
 
 ## creating mqtt client object
