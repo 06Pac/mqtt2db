@@ -36,7 +36,8 @@ def mqtt_aunth():
     # username = input()
     # print('Enter MQTT psw:')
     # password = input()
-    client.username_pw_set('project-software-engineering@ttn','NNSXS.DTT4HTNBXEQDZ4QYU6SG73Q2OXCERCZ6574RVXI.CQE6IG6FYNJOO2MOFMXZVWZE4GXTCC2YXNQNFDLQL4APZMWU6ZGA')
+    client.username_pw_set('project-software-engineering@ttn',
+                           'NNSXS.DTT4HTNBXEQDZ4QYU6SG73Q2OXCERCZ6574RVXI.CQE6IG6FYNJOO2MOFMXZVWZE4GXTCC2YXNQNFDLQL4APZMWU6ZGA')
     own_sensor.username_pw_set(username=OWN_USERNAME, password=OWN_PASSWD)
 
 
@@ -77,11 +78,15 @@ def on_message(client, userdata, msg):
     data = SensorData()
     ## converting to json format
     to_string = json.loads(msg.payload)
+    print(msg.payload)
     print(to_string)
     ## calling SensorData member function for parsing data and assigning class variables
     data.weather_data_parse(to_string)
     ##  array with SensorData variables, previusly assigned dy parse() function.
-    db_values = (data.device_id, data.datetime, data.temperature, data.light, data.pressure, data.humidity)
+    # temperature,light,pressure,humidity,timestamp,device_id,latitude,longitude,battery_status,battery_voltage
+    db_values = (
+        data.temperature, data.light, data.pressure, data.humidity, data.timestamp, data.device_id, data.latitude,
+        data.longitude, data.battery_status, data.battery_voltage)
     ## cursor is Mysql object to manipulate with DB
     cursor = connection.cursor()
     ## pushing to db
